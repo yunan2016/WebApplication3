@@ -17,5 +17,13 @@ namespace WebApplication3
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
         }
+        void Application_Error(object sender, EventArgs e)
+        {
+            // Code that runs when an unhandled error occurs
+            Exception ex = Server.GetLastError();
+            Session["TheException"] = ex; //store the error for later
+
+            Server.Transfer("~/WebForm1.aspx");
+        }
     }
 }

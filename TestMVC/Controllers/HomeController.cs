@@ -4,13 +4,14 @@ using System.ComponentModel.DataAnnotations;
 using System.Text;
 using System.Web.Mvc;
 using TestMVC.Models;
-
+using Microsoft.AspNet.Identity;
 namespace TestMVC.Controllers
 {
     public class HomeController : Controller
     {
         public ActionResult Index()
         {
+            string userId = User.Identity.GetUserId();
             Session["a"] = "3";
             ViewBag.ActiveButton = "True";
             ViewBag.NameSortParm = "name_desc";

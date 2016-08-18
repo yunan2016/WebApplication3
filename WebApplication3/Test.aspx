@@ -5,74 +5,53 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
     <title></title>
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/semantic-ui/0.16.1/javascript/semantic.min.js"></script>
+<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
-    <script type="text/javascript">
-     
-    </script>
+
+<script type="text/javascript">
+    $(function () {
+        $("input:checkbox").change(function () {
+            var tuisre = $(this).is(":checked");
+            if (tuisre) {
+                $(this).parent().prev().eq(0).text("close");
+                alert("123");
+            } else {
+                $(this).parent().prev().eq(0).text("open");
+            }
+        })
+    })
+
+</script>
 </head>
 <body>
     <form id="form1" runat="server">
-     
-
-        <asp:GridView ID="GridView1" HeaderStyle-BackColor="#3AC0F2" HeaderStyle-ForeColor="White"
-            RowStyle-BackColor="#A1DCF2" AlternatingRowStyle-BackColor="White" AlternatingRowStyle-ForeColor="#000"
-            runat="server" AutoGenerateColumns="false">
-
-            <Columns>
-
-                <asp:BoundField DataField="Item" HeaderText="Item" />
-
-                <asp:TemplateField HeaderText="Price">
-
-                    <ItemTemplate>
-
-                        <asp:TextBox ID="txtPrice" runat="server" Text='<%# Eval("Price") %>'></asp:TextBox><br />
-
-                        <asp:RequiredFieldValidator ID="rfvPrice" ControlToValidate="txtPrice" runat="server"
-                            ErrorMessage="Required" ForeColor="Red"></asp:RequiredFieldValidator>
-
-                    </ItemTemplate>
-
-                </asp:TemplateField>
-
-                <asp:TemplateField HeaderText="Quantity">
-
-                    <ItemTemplate>
-
-                        <asp:TextBox ID="txtQuantity" runat="server" Text='<%# Eval("Quantity") %>'></asp:TextBox><br />
-
-                        <asp:RequiredFieldValidator ID="rfvQuantity" ControlToValidate="txtQuantity" runat="server"
-                            ErrorMessage="Required" ForeColor="Red"></asp:RequiredFieldValidator>
-
-                    </ItemTemplate>
-
-                </asp:TemplateField>
-                <asp:TemplateField>
-                    <ItemTemplate>
-                        <asp:DropDownList ID="ddl" runat="server" AutoPostBack="true" OnSelectedIndexChanged="ddl_Selected">
-                            <asp:ListItem Text="1"> 1</asp:ListItem>
-                            <asp:ListItem Text="2"> 2</asp:ListItem>
-                            <asp:ListItem Text="3"> 3</asp:ListItem>
-                            <asp:ListItem Text="4"> 4</asp:ListItem>
-                            <asp:ListItem Text="--Select--" Selected="True">Selected</asp:ListItem>
-                        </asp:DropDownList>
-
-                    </ItemTemplate>
-
-                </asp:TemplateField>
-                <asp:TemplateField HeaderText="Sample">
-                    <ItemTemplate>
-
-                        <asp:ListBox ID="lst" runat="server" Rows="10"></asp:ListBox>
-                    </ItemTemplate>
-                </asp:TemplateField>
-
-            </Columns>
-
-        </asp:GridView>
-
+<div>
+       <table id="table1">
+            <tr>
+                <th>Title</th>
+                <th>Priority</th>
+                <th>Due Date</th>
+                <th>status</th>
+                <th>Complete</th>
+           </tr>
+            <tr>
+                <td>DATE</td> 
+                <td>DATE</td>
+                <td>DATE</td>
+                <td>Open</td>
+                <td><asp:CheckBox ID="CheckBox2" runat="server" /></td>
+           </tr>
+            <tr>
+                <td>DATE</td> 
+                <td>DATE</td>
+                <td>DATE</td>
+                <td>Open</td>
+                <td><asp:CheckBox ID="CheckBox3" runat="server" /></td>
+           </tr>
+       </table>
+    </div>
 
     </form>
 </body>

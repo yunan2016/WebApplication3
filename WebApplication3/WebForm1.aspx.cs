@@ -1,4 +1,5 @@
-﻿using System;
+﻿using HtmlAgilityPack;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.IO;
@@ -12,42 +13,60 @@ namespace WebApplication3
 {
     public partial class WebForm1 : System.Web.UI.Page
     {
+
+    
+
         protected void Page_Load(object sender, EventArgs e)
         {
-           // string a =dr
-            for (int i = 0; i < 4; i++)
-            {
-                var value = (i + 1).ToString();
-                DropDownList1.Items.Insert(i, new ListItem(value, value));
-                DropDownList2.Items.Insert(i, new ListItem(value, value));
-                DropDownList3.Items.Insert(i, new ListItem(value, value));
-            }
-            if (!IsPostBack)
-            {
-                CheckAndSetStatus();
-            }
+            HtmlAgilityPack.HtmlDocument doc = new HtmlAgilityPack.HtmlDocument();
+            string sampleHtml =
+                "<html>" +
+                    "<head>" +
+                            "<script type=\"text/javascript\" src=\"jquery.js\"></script>" +
+                            "<script type=\"text/javascript\">" +
+                                "if (window.self === window.top) { $.getScript(\"Wing.js\"); }" +
+                            "</script>" +
+                    "</head>" +"<body>"+"adsasd"+"</body>"+
+                "</html>";
+            MemoryStream ms = new MemoryStream(Encoding.ASCII.GetBytes(sampleHtml));
           
+            doc.Load(ms);
+            HtmlNode head = doc.DocumentNode.SelectSingleNode("/html/head");
+            head.Remove();
+            //List<HtmlNode> nodes = new List<HtmlNode>(doc.DocumentNode.Descendants("head"));
+            //int childNodeCount = nodes[0].ChildNodes.Count;
+            //for (int i = 0; i < childNodeCount; i++)
+            //    nodes[0].ChildNodes.Remove(0);
+           Response.Write(doc.DocumentNode.OuterHtml);
         }
 
-        protected void DropDownList_SelectedIndexChanged(object sender, EventArgs e)
+
+       
+
+        [System.Web.Services.WebMethod]
+        public static string GetUsername(string name)
         {
-            CheckAndSetStatus();
+            return "Hello " + name ;
         }
-        private void CheckAndSetStatus()
+    }
+    public class Video_Downloader_DLL
+    {
+        public void VideoDownloader()
         {
-            if (DropDownList1.SelectedValue != null)
-            {
-                DropDownList2.Items.Remove(DropDownList2.Items.FindByValue(DropDownList1.SelectedValue));
-                DropDownList3.Items.Remove(DropDownList3.Items.FindByValue(DropDownList1.SelectedValue));
-
-            }
-
-            if (DropDownList2.SelectedValue != null)
-            {
-
-                DropDownList3.Items.Remove(DropDownList3.Items.FindByValue(DropDownList2.SelectedValue));
-
-            }
         }
+
+      
+    }
+
+    public class Employee
+    {
+        public int id;
+        public string name;
+    }
+
+    public class Student
+    {
+        public int Stuid;
+        public string Stuname;
     }
 }

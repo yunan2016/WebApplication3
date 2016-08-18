@@ -17,7 +17,16 @@
     }
  }
 
+<div>
+    <button id="apply" class="active" onclick="change(this)">Detail</button>
+</div>
+<script type="text/javascript">
+    function change(value) {
 
+        if (value.innerHTML == "Detail") value.innerHTML = "Back";
+        else value.innerHTML = "Detail";
+    }
+</script>
 
 <fieldset>
     <legend>Calculate Simple Interest</legend>

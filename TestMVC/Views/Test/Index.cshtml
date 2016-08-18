@@ -1,0 +1,23 @@
+﻿@{
+    ViewBag.Title = "Index";
+}
+
+@using (Html.BeginForm("", "Test", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+
+    <input type="file" name="FileUpload1" /><br />
+    <input type="submit" name="Submit" id="Submit" value="Upload" />
+}
+<div height="240" width="320" controls>
+    <video>
+        <source src="@Url.Content("~/uploads/test.wmv")" type='video/x-ms-wmv' />
+    </video>
+</div>
+
+<object data="~/uploads/test.wmv" type="video/x-ms-wmv" width="100%" height="100%">
+    <param name="src" value="~/uploads/test.wmv">
+    <param name="autoStart" value="1">
+    alt : <a href="~/uploads/test.wmv">My video name</a>
+</object>
+
+
